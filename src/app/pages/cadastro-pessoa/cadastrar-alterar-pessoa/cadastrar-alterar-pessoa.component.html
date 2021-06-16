@@ -1,0 +1,57 @@
+<div class="container">
+
+  <mat-card class="card-cadastro">
+    <mat-card-header>
+      <mat-card-title>Cadastro de pessoas</mat-card-title>
+      <mat-card-subtitle>Informe os dados abaixo para cadastrar/alterar uma pessoa</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form [formGroup]="formPessoa" novalidate>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput formControlName="nome" placeholder="Ex. Gustavo Rodrigues da Silveira" required>
+          <mat-error *ngIf="formPessoa.get('nome').hasError('required') && formPessoa.get('nome').touched">
+            Nome é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex: gustavo.rs@lyncas.net" required>
+          <mat-error *ngIf="formPessoa.get('email').hasError('email') && formPessoa.get('email').touched">
+            Por favor, informe um email válido
+          </mat-error>
+          <mat-error *ngIf="formPessoa.get('email').hasError('required') && formPessoa.get('email').touched">
+            Email é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>CPF/CNPJ</mat-label>
+          <input type="text" mask="000.000.000-00||00.000.000/0000-00" matInput formControlName="numeroDocumento" required>
+          <mat-error *ngIf="formPessoa.get('numeroDocumento').hasError('required') && formPessoa.get('numeroDocumento').touched">
+            Documento é <strong>obrigatório</strong>
+          </mat-error>
+          <mat-error *ngIf="formPessoa.get('numeroDocumento').hasError('minlength') && formPessoa.get('numeroDocumento').touched">
+            Por favor, informe um documento válido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="warn" [routerLink]="['']">Cancelar</button>
+          <button mat-raised-button color="primary" (click)="cadastrarAlterar()" *ngIf="!alterandoPessoa">
+            <mat-icon>person_add_alt_1</mat-icon> Cadastrar
+          </button>
+          <button mat-raised-button color="primary" (click)="cadastrarAlterar()" *ngIf="alterandoPessoa">
+            <mat-icon>restart_alt</mat-icon> Atualizar
+          </button>
+        </mat-card-actions>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

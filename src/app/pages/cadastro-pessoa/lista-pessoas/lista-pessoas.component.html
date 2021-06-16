@@ -1,0 +1,64 @@
+<div class="container">
+
+  <mat-card >
+
+    <mat-progress-bar mode="query" class="progress-bar" *ngIf="mostrarCarregamento"></mat-progress-bar>
+
+    <mat-card-header>
+      <mat-card-title>Lista de pessoas</mat-card-title>
+      <mat-card-subtitle>Adicione, altere ou delete uma pessoa da lista</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <button mat-button color="primary" [routerLink]="['pessoa']">
+        <mat-icon>add</mat-icon> Adicionar pessoa
+      </button>
+
+      <mat-table [dataSource]="dataSource">
+        <mat-header-row *matHeaderRowDef="colunasTabela"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunasTabela;"></mat-row>
+
+        <ng-container matColumnDef="Nome">
+          <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let pessoa">{{pessoa.nome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let pessoa"> {{pessoa.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="CPF/CNPJ">
+          <mat-header-cell *matHeaderCellDef> CPF/CNPJ </mat-header-cell>
+          <mat-cell *matCellDef="let pessoa"> {{pessoa.numeroDocumento}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TipoPessoa">
+          <mat-header-cell *matHeaderCellDef> Tipo de pessoa </mat-header-cell>
+          <mat-cell *matCellDef="let pessoa"> {{pessoa.tipoPessoa}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Ações" slot="end">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let pessoa" class="tabela-acoes">
+            <button mat-button color="primary" [routerLink]="['/pessoa', pessoa.id]">
+              <mat-icon style="font-size: 18px;">edit</mat-icon> Editar
+            </button>
+
+            <button mat-button color="warn" (click)="deletarPessoa(pessoa)">
+              <mat-icon style="font-size: 18px;">delete</mat-icon> Excluir
+            </button>
+
+          </mat-cell>
+        </ng-container>
+
+      </mat-table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]"></mat-paginator>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
