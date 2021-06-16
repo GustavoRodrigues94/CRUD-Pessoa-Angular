@@ -1,3 +1,6 @@
+![](https://user-images.githubusercontent.com/40209308/122224592-a2f97c00-ce8a-11eb-8d06-b6ea83ed56e4.png)
+
+
 # CrudPessoa
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
